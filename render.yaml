@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: network-scanner
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://log_user:uiCHh0hvy13nx53PrzPNiLoIP2bJRllT@dpg-cvok1dq4d50c73bintn0-a/log_analysis_db
+      - key: SECRET_KEY
+        generateValue: true
