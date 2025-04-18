@@ -11,8 +11,10 @@ class User(UserMixin, db.Model):
      password = db.Column(db.String(512), nullable=False)
 
 class Scan(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    ip_address = db.Column(db.String(100), nullable=False)
-    open_ports = db.Column(db.String(200))
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+     __tablename__ = 'scans'
+     id = db.Column(db.Integer, primary_key=True)
+     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+     ip_address = db.Column(db.String(255), nullable=False)
+     open_ports = db.Column(db.Text, nullable=False)
+     timestamp = db.Column(db.DateTime, server_default=db.func.now())
+
