@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+     <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Welcome to Network Scanner, {{ current_user.username }}!</h2>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        </div>
     <div class="container mt-5">
         <h2 class="text-center">Welcome to Network Scanner, {{ current_user.username }}!</h2>
         <form method="POST" class="text-center">
