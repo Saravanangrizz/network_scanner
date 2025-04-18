@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev_secret")
 
 # PostgreSQL config from Render
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///local.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "postgresql://log_user:uiCHh0hvy13nx53PrzPNiLoIP2bJRllT@dpg-cvok1dq4d50c73bintn0-a/log_analysis_db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
