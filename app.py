@@ -4,7 +4,11 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Scan
 from scanner import scan_network
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
+
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev_secret")
