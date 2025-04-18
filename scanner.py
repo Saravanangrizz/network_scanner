@@ -9,7 +9,7 @@ def scan_host(ip, ports=COMMON_PORTS):
     open_ports = []
     for port in ports:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(0.5)  # Set timeout for each port check
+            sock.settimeout(0.5)
             result = sock.connect_ex((ip, port))
             if result == 0:
                 open_ports.append(port)
