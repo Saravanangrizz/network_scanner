@@ -22,4 +22,14 @@
         <p class="text-center">Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
     </div>
 </body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-warning text-center mt-3">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 </html>
