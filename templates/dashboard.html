@@ -1,27 +1,34 @@
-<h2>Welcome, {{ current_user.username }}</h2>
-<form method="POST">
-  <input name="network" placeholder="192.168.1.0/24" required>
-  <button type="submit">Scan</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Welcome to Network Scanner, {{ current_user.username }}!</h2>
+        <form method="POST" class="text-center">
+            <input type="text" name="network" class="form-control" placeholder="Enter Network IP" required>
+            <button type="submit" class="btn btn-primary btn-lg mt-3">Scan Network</button>
+        </form>
 
-{% if results %}
-  <h3>Scan Results</h3>
-  <ul>
-    {% for ip, ports in results %}
-      <li>{{ ip }}: {{ ports|join(', ') }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
-<h3>Previous Scans</h3>
-<table>
-  <tr><th>Date</th><th>IP</th><th>Ports</th></tr>
-  {% for scan in history %}
-    <tr>
-      <td>{{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-      <td>{{ scan.ip_address }}</td>
-      <td>{{ scan.open_ports }}</td>
-    </tr>
-  {% endfor %}
-</table>
-<a href="{{ url_for('logout') }}">Logout</a>
+        <h3 class="mt-5">Scan History</h3>
+        <div class="row">
+            {% for scan in history %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ scan.ip_address }}</h5>
+                            <p class="card-text">Open Ports: {{ scan.open_ports }}</p>
+                            <p class="card-text"><small class="text-muted">{{ scan.timestamp }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
