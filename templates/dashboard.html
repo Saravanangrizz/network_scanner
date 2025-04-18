@@ -1,0 +1,27 @@
+<h2>Welcome, {{ current_user.username }}</h2>
+<form method="POST">
+  <input name="network" placeholder="192.168.1.0/24" required>
+  <button type="submit">Scan</button>
+</form>
+
+{% if results %}
+  <h3>Scan Results</h3>
+  <ul>
+    {% for ip, ports in results %}
+      <li>{{ ip }}: {{ ports|join(', ') }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<h3>Previous Scans</h3>
+<table>
+  <tr><th>Date</th><th>IP</th><th>Ports</th></tr>
+  {% for scan in history %}
+    <tr>
+      <td>{{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      <td>{{ scan.ip_address }}</td>
+      <td>{{ scan.open_ports }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<a href="{{ url_for('logout') }}">Logout</a>
